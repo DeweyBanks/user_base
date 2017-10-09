@@ -6,7 +6,8 @@ RSpec.describe Api::V1::PostsController, :type => :controller do
 
   describe "GET #show" do
     before(:each) do
-      @post = FactoryGirl.create :post
+      @user = FactoryGirl.create :user
+      @post = FactoryGirl.create :post, user: @user
       get :show, id: @post.id, format: :json
     end
 
