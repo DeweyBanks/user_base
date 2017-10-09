@@ -9,8 +9,8 @@ Rails.application.routes.draw do
               constraints: { subdomain: 'api' }, path: '/'  do
     scope module: :v1,
               constraints: ApiConstraints.new(version: 1, default: true) do
-      resources :posts, only: [:index, :create, :update, :delete, :show]
-      resources :users, :only => [:show, :create, :update]
+      resources :posts, only: [:index, :create, :update, :destroy, :show]
+      resources :users, :only => [:show, :create, :update, :destroy]
     end
   end
 end

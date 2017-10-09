@@ -36,6 +36,7 @@ class Api::V1::UsersController < ApplicationController
   end
 
   def destroy
+    current_user = User.find(params[:id])
     current_user.destroy
     head 204
   end
