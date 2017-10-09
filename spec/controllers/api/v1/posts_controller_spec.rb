@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-describe Api::V1::PostsController, :type => :controller do
+RSpec.describe Api::V1::PostsController, :type => :controller do
 
   before(:each) { request.headers['Accept'] = "application/vnd.user-base.v1" }
 

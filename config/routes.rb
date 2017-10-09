@@ -19,6 +19,7 @@ Rails.application.routes.draw do
               constraints: ApiConstraints.new(version: 1, default: true) do
       # We are going to list our resources here
       resources :posts, only: [:index, :create, :update, :delete, :show]
+      resources :users, :only => [:show]
     end
   end
 end
