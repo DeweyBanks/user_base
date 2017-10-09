@@ -17,7 +17,7 @@ RSpec.describe Post, type: :model do
 
   context 'with invalid attributes' do
     it "shuld be invalid" do
-      @post = FactoryGirl.build(:post)
+      @post = FactoryGirl.build(:post, user: nil)
       expect(@post).to_not be_valid
     end
   end
