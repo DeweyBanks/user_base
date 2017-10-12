@@ -7,6 +7,7 @@ RSpec.describe User, type: :model do
     it { should validate_uniqueness_of(:email).case_insensitive }
     it { should validate_presence_of(:password) }
     it { should validate_uniqueness_of(:auth_token)}
+    it { should have_many(:posts) }
   end
 
   context 'with valid attributes' do
@@ -19,6 +20,23 @@ RSpec.describe User, type: :model do
      before { @user = FactoryGirl.build(:user, email: "") }
      subject {@user}
      it { is_expected.to be_invalid }
+  end
+
+  describe "#posts association" do
+     before { @user = FactoryGirl.build(:user) }
+     subject { @user }
+    before do
+      @user.save
+      3.times { FactoryGirl.create :post, user: @user }
+    end
+
+    it "destroys the associated products on self destruct" do
+      posts = @user.posts
+      @user.destroy
+      posts.each do |post|
+        expect{Post.find(post.id)}.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
   end
 
   describe "#generate_authentication_token!" do

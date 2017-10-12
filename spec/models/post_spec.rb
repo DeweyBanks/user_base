@@ -5,6 +5,7 @@ RSpec.describe Post, type: :model do
     @user = FactoryGirl.create(:user)
     @post = FactoryGirl.build(:post, user: @user)
     it { should validate_presence_of(:user) }
+    it { should belong_to :user }
   end
 
   context 'with valid attributes' do
